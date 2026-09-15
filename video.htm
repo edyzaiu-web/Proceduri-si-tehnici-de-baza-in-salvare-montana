@@ -1,191 +1,138 @@
-<!DOCTYPE HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manualul Salvatorului Montan - Galerie Video</title>
+<meta name="generator" content="Antenna 4.5">
+<link rel="stylesheet" type="text/css" href="antenna.css" id="css">
 <style type="text/css">
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; }
+  .abs { position: absolute; }
   
-  /* Container Antet Imagine */
-  .header-banner {
-    width: 100%;
-    background-color: #d32f2f;
-    text-align: center;
-  }
-  .header-banner img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-
-  /* Navigare */
-  .nav-menu { background-color: #333; display: flex; justify-content: center; gap: 20px; padding: 10px 0; }
-  .nav-menu a { color: white; text-decoration: none; font-size: 14px; font-weight: bold; }
-
-  /* Grid Principal: Player Stânga, Playlist Dreapta */
-  .main-layout {
-    max-width: 1100px;
-    margin: 20px auto;
-    padding: 0 10px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .video-column {
-    flex: 1 1 600px;
-  }
-
-  .playlist-column {
-    flex: 0 0 380px;
-  }
-
-  @media (max-width: 850px) {
-    .playlist-column {
-      flex: 1 1 100%;
-    }
-  }
-
-  .video-title { 
-    background: #fff; 
-    padding: 10px; 
-    font-weight: bold; 
-    font-size: 14px; 
-    text-align: center; 
-    border: 1px solid #ccc; 
-    margin-bottom: 10px; 
-    border-radius: 4px; 
-  }
-
-  .video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    background-color: #000;
-  }
-
-  .video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-
-  .playlist-header { 
-    background-color: #0056b3; 
-    color: white; 
-    padding: 11px; 
-    text-align: center; 
-    font-weight: bold; 
-    font-size: 14px; 
-    border-radius: 4px 4px 0 0; 
-  }
-
-  .playlist-container { 
-    background: white; 
-    border: 1px solid #ccc; 
-    max-height: 450px; 
-    overflow-y: auto; 
-    border-radius: 0 0 4px 4px; 
+  /* Stiluri pentru lista interactiva */
+  .playlist-container {
+    width: 380px;
+    height: 340px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
   }
   
-  .playlist-item { 
-    padding: 10px 12px; 
-    border-bottom: 1px solid #eee; 
-    font-size: 13px; 
-    cursor: pointer; 
-    transition: background 0.2s; 
+  .playlist-item {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #333;
+    transition: background-color 0.2s;
   }
-  .playlist-item:hover { background-color: #e6f2ff; color: #0056b3; }
-  .playlist-item.active { background-color: #0056b3; color: white; font-weight: bold; }
+  
+  .playlist-item:hover {
+    background-color: #e6f2ff;
+    color: #0056b3;
+  }
+  
+  .playlist-item.active {
+    background-color: #0056b3;
+    color: #ffffff;
+    font-weight: bold;
+  }
 </style>
-</head>
-<body>
 
-<!-- ANTET CU IMAGINE -->
-<div class="header-banner">
-  <!-- Asigură-te că fișierul antet.jpg se află în același folder cu video.htm sau ajustează calea -->
-  <img src="antet.jpg" alt="Asociația Națională a Salvatorilor Montani din România">
-</div>
-
-<div class="nav-menu">
-  <a href="index.html">Home</a>
-  <a href="materiale tehnice necesare actiunilor de salvare/materiale tehnice necesare actiunilor de salvare.htm">Vara</a>
-  <a href="sezon de iarna/salvarea in sezonul de iarna.htm">Iarna</a>
-  <a href="video.htm">Video</a>
-</div>
-
-<!-- STRUCTURA PARALELĂ -->
-<div class="main-layout">
-
-  <!-- COLOANA STÂNGA: PLAYER VIDEO -->
-  <div class="video-column">
-    <div class="video-title" id="current-title">1. Dispunerea corzilor în tiroliană</div>
-    <div class="video-wrapper">
-      <iframe id="main-player" src="https://www.youtube.com/embed/wTOv3MnE7qc?autoplay=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-  </div>
-
-  <!-- COLOANA DREAPTA: PLAYLIST 1-26 -->
-  <div class="playlist-column">
-    <div class="playlist-header">LISTĂ VIDEOCLIPURI</div>
-    <div class="playlist-container">
-      <div class="playlist-item active" data-video="wTOv3MnE7qc" onclick="schimbaVideo(this)">1. Dispunerea corzilor in tiroliana</div>
-      <div class="playlist-item" data-video="Sy-sn3HMcrI" onclick="schimbaVideo(this)">2. Dublu pescarescu</div>
-      <div class="playlist-item" data-video="9KVO-mDOtaY" onclick="schimbaVideo(this)">3. Amaraj parte fixa tiroliana</div>
-      <div class="playlist-item" data-video="rON3upAhyPQ" onclick="schimbaVideo(this)">4. Echiparea paului cu sistemul de elavare 3x3</div>
-      <div class="playlist-item" data-video="EVXUX-cLjto" onclick="schimbaVideo(this)">5. Elevare pe tandem</div>
-      <div class="playlist-item" data-video="QpWSBehahpc" onclick="schimbaVideo(this)">6. Inodarea a 2 corzi sub tensiune</div>
-      <div class="playlist-item" data-video="yWxxGdajbMY" onclick="schimbaVideo(this)">7. Intindere parte mobila tiroliana</div>
-      <div class="playlist-item" data-video="0kFrWzyXslA" onclick="schimbaVideo(this)">8. Amaraj la 3 puncte pe Anou</div>
-      <div class="playlist-item" data-video="S6dYVjTx7DQ" onclick="schimbaVideo(this)">9. Bucla reglabila efectuat pe un sistem de 3x3</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_10" onclick="schimbaVideo(this)">10. Bucla simpla reglabila</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_11" onclick="schimbaVideo(this)">11. Depasirea nodului in elevare printr-un sistem de 3x3</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_12" onclick="schimbaVideo(this)">12. Din lansare pe 2 corzi inodarea a 2corzi in tensiune</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_13" onclick="schimbaVideo(this)">13. Lans 2 opturi si trecerea in elevare</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_14" onclick="schimbaVideo(this)">14. Lansare la 1-2 placute mana curenta</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_15" onclick="schimbaVideo(this)">15. Lansare la 2 semi cab si trecerea in elevare</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_16" onclick="schimbaVideo(this)">16. Lansare pe 2 opturi si elevare gr1 in oglinda</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_17" onclick="schimbaVideo(this)">17. Lansare pe 2 placute si elevare pe 2 corzi in oglinda</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_18" onclick="schimbaVideo(this)">18. Amaraj parte fixa tiroliana</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_19" onclick="schimbaVideo(this)">19. Trecereaa din scripete de g1 in 3x3 1 coarda</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_20" onclick="schimbaVideo(this)">20. Lonja reglabila in sistem de elevare</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_21" onclick="schimbaVideo(this)">21. Nodul de tiroliana</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_22" onclick="schimbaVideo(this)">22. Lansare pe hidrobot si trecere in elevare</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_23" onclick="schimbaVideo(this)">23. Nodul simplu opt</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_24" onclick="schimbaVideo(this)">24. Optul prin urmărire</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_25" onclick="schimbaVideo(this)">25. Parte mobila tiroliana (2)</div>
-      <div class="playlist-item" data-video="ID_YOUTUBE_26" onclick="schimbaVideo(this)">26. Trecerea din lansare in elevare la 1 coarda</div>
-    </div>
-  </div>
-
-</div>
-
-<script>
-function schimbaVideo(element) {
-  var videoId = element.getAttribute('data-video');
-  var titlu = element.innerText;
-  
-  var player = document.getElementById('main-player');
-  player.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
-  
-  document.getElementById('current-title').innerText = titlu;
-  
-  var items = document.querySelectorAll('.playlist-item');
-  items.forEach(function(item) {
-    item.classList.remove('active');
-  });
-  element.classList.add('active');
-}
+<script type="text/javascript">
+  function schimbaVideo(element) {
+    var videoId = element.getAttribute('data-video');
+    var titlu = element.innerText;
+    
+    var player = document.getElementById('mainPlayer');
+    player.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+    
+    var titluBox = document.getElementById('titluVideoCurent');
+    titluBox.innerHTML = titlu;
+    
+    var items = document.querySelectorAll('.playlist-item');
+    items.forEach(function(item) {
+      item.classList.remove('active');
+    });
+    element.classList.add('active');
+  }
 </script>
+</head>
+<body class="global ctt" style="background-repeat:no-repeat; background-attachment:fixed;">
+<div class="ctr global" style="width:989px">
+<div id="lays576uxdtk">
 
+  <!-- Antet Fundal -->
+  <div id="panl660omobo" class="pnl abs" style="left:0px; top:0px; width:989px; height:195px; background-color:#FFFFFF;"></div>
+
+  <!-- Imagini Antet -->
+  <div id="pict491jfgum" class="abs" style="left:0px; top:0px; width:989px; height:162px;">
+    <img id="pict491jfgumi" class="fil smf" src="images/munte 3.png" alt="">
+  </div>
+  <div id="pict533rqqrk" class="abs" style="left:793px; top:12px; width:179px; height:162px;">
+    <img id="pict533rqqrki" class="fil smf" src="images/untitled-1 copy.png" alt="">
+  </div>
+
+  <!-- Titluri Antet -->
+  <div id="text496zwhfz" class="aut abs" style="left:58px; top:8px; width:537px; height:32px;">
+    <p><font color="#ffffff">ASOCIATIA NATIONALA A SALVATORILOR MONTANI DIN ROMANIA</font></p>
+  </div>
+  <div id="text497mnzeu" class="aut abs" style="left:144px; top:39px; width:600px; height:31px;">
+    <p><font color="#ffffff"><b>PROCEDURI ȘI TEHNICI DE BAZĂ ÎN SALVAREA MONTANĂ</b></font></p>
+  </div>
+
+  <!-- Meniu Navigare -->
+  <div id="text576skszv" class="styl576vpget aut abs" style="left:20px; top:166px; width:397px; height:36px;">
+    <p><a href="index.htm">home</a> | <a href="materiale tehnice necesare actiunilor de salvare/materiale tehnice necesare actiunilor de salvare.htm">Vara</a> | <a href="sezon de iarna/salvarea in sezonul de iarna.htm">Iarna</a> | <a href="video.htm">video</a></p>
+  </div>
+
+  <!-- Titlul Videoclipului Curent -->
+  <div id="titluVideoCurent" class="aut abs" style="left:20px; top:210px; width:550px; height:35px; border-style:groove; background-color:#FFFFFF; text-align:center; line-height:35px; font-weight:bold; font-size:14px;">
+    1. Dispunerea corzilor in tiroliana
+  </div>
+
+  <!-- Player Video YouTube (Stânga) -->
+  <div id="wmpl701uyeww" class="abs" style="left:20px; top:255px; width:550px; height:340px; background-color:#000000; z-index:9999;">
+    <iframe id="mainPlayer" width="550" height="340" src="https://www.youtube.com/embed/wTOv3MnE7qc?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <!-- Titlu Lista Video (Dreapta) -->
+  <div class="aut abs" style="left:580px; top:210px; width:380px; height:35px; background-color:#0056b3; color:#ffffff; text-align:center; line-height:35px; font-weight:bold; font-size:14px;">
+    LISTA VIDEOCLIPURI
+  </div>
+
+  <!-- Lista cu cele 26 de videoclipuri (Dreapta) -->
+  <div class="playlist-container abs" style="left:580px; top:255px;">
+    <div class="playlist-item active" data-video="wTOv3MnE7qc" onclick="schimbaVideo(this)">1. Dispunerea corzilor in tiroliana</div>
+    <div class="playlist-item" data-video="Sy-sn3HMcrI" onclick="schimbaVideo(this)">2. Dublu pescarescu</div>
+    <div class="playlist-item" data-video="9KVO-mDOtaY" onclick="schimbaVideo(this)">3. Amaraj parte fixa tiroliana</div>
+    <div class="playlist-item" data-video="rON3upAhyPQ" onclick="schimbaVideo(this)">4. Echiparea paului cu sistemul de elavare 3x3</div>
+    <div class="playlist-item" data-video="EVXUX-cLjto" onclick="schimbaVideo(this)">5. Elevare pe tandem</div>
+    <div class="playlist-item" data-video="QpWSBehahpc" onclick="schimbaVideo(this)">6. Inodarea a 2 corzi sub tensiune</div>
+    <div class="playlist-item" data-video="yWxxGdajbMY" onclick="schimbaVideo(this)">7. Intindere parte mobila tiroliana</div>
+    <div class="playlist-item" data-video="0kFrWzyXslA" onclick="schimbaVideo(this)">8. Amaraj la 3 puncte pe Anou</div>
+    <div class="playlist-item" data-video="S6dYVjTx7DQ" onclick="schimbaVideo(this)">9. Bucla reglabila efectuat pe un sistem de 3x3.</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_10" onclick="schimbaVideo(this)">10. Bucla simpla reglabila</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_11" onclick="schimbaVideo(this)">11. Depasirea nodului in elevare printr-un sistem de 3x3</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_12" onclick="schimbaVideo(this)">12. Din lansare pe 2 corzi inodarea a 2corzi in tensiune</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_13" onclick="schimbaVideo(this)">13. Lans 2 opturi si trecerea in elevare</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_14" onclick="schimbaVideo(this)">14. Lansare la 1-2 placute mana curenta</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_15" onclick="schimbaVideo(this)">15. Lansare la 2 semi cab si trecerea in elevare</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_16" onclick="schimbaVideo(this)">16. Lansare pe 2 opturi si elevare gr1 in oglinda</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_17" onclick="schimbaVideo(this)">17. Lansare pe 2 placute si elevare pe 2 corzi in oglinda</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_18" onclick="schimbaVideo(this)">18. Amaraj parte fixa tiroliana</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_19" onclick="schimbaVideo(this)">19. Trecereaa din scripete de g1 in 3x3 1 coarda</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_20" onclick="schimbaVideo(this)">20. Lonja reglabila in sistem de elevare</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_21" onclick="schimbaVideo(this)">21. Nodul de tiroliana</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_22" onclick="schimbaVideo(this)">22. Lansare pe hidrobot si trecere in elevare</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_23" onclick="schimbaVideo(this)">23. Nodul simplu opt</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_24" onclick="schimbaVideo(this)">24. Optul prin urmărire</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_25" onclick="schimbaVideo(this)">25. Parte mobila tiroliana (2).</div>
+    <div class="playlist-item" data-video="ID_YOUTUBE_26" onclick="schimbaVideo(this)">26. Trecerea din lansare in elevare la 1 coarda</div>
+  </div>
+
+</div>
+</div>
 </body>
 </html>
