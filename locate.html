@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salvamont Lupeni - Localizare SOS</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #f0f2f5; text-align: center; padding: 20px; }
+        .card { background: white; padding: 40px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); max-width: 450px; width: 100%; border-top: 8px solid #d32f2f; }
+        h1 { color: #d32f2f; margin-top: 0; font-size: 28px; }
+        p { color: #444; line-height: 1.6; font-size: 18px; }
+        #sendBtn { background-color: #d32f2f; color: white; border: none; padding: 20px; font-size: 20px; border-radius: 12px; cursor: pointer; margin-top: 30px; width: 100%; font-weight: bold; transition: background 0.3s; }
+        #sendBtn:active { background-color: #b71c1c; transform: scale(0.98); }
+        #sendBtn:disabled { background-color: #aaa; cursor: not-allowed; }
+        #status { margin-top: 25px; font-size: 16px; font-weight: 600; min-height: 50px; }
+        .logo { width: 100px; margin-bottom: 10px; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #d32f2f; border-radius: 50%; width: 30px; height: 30px; animation: spin 2s linear infinite; display: none; margin: 10px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <img src="https://salvamont.org/wp-content/uploads/2021/04/cropped-logo-salvamont-1.png" alt="Logo Salvamont" class="logo">
+    <h1>URGENȚĂ SALVAMONT</h1>
+    <p>Apasă butonul de mai jos pentru a trimite coordonatele tale GPS către echipa de salvare Salvamont Lupeni.</p>
+
+    <button id="sendBtn">TRIMITE LOCAȚIA MEA</button>
+    <div id="loader" class="loader"></div>
+    <div id="status"></div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // --- CONFIGURAȚIA TA REALĂ ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0l4rHh54MSKFxjwz7_YEYevRfYskndSg",
+      authDomain: "salvamont-chat.firebaseapp.com",
+      projectId: "salvamont-chat",
+      storageBucket: "salvamont-chat.firebasestorage.app",
+      messagingSenderId: "67416337647",
+      appId: "1:67416337647:web:1ec9466f103deac12a7f1a",
+      measurementId: "G-XWYTWR7WJQ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const btn = document.getElementById('sendBtn');
+    const statusDiv = document.getElementById('status');
+    const loader = document.getElementById('loader');
+
+    // Luăm missionId din link (?missionId=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const missionId = urlParams.get('missionId');
+
+    btn.onclick = () => {
+        if (!missionId) {
+            statusDiv.innerText = "Eroare: Link invalid. Te rugăm să ceri un link nou de la salvatori.";
+            statusDiv.style.color = "#d32f2f";
+            return;
+        }
+
+        if (!navigator.geolocation) {
+            statusDiv.innerText = "Browserul tău nu suportă GPS.";
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerText = "TE LOCALIZĂM...";
+        loader.style.display = "block";
+        statusDiv.innerText = "Acceptă accesul la locație dacă ești întrebat.";
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                try {
+                    statusDiv.innerText = "Se transmit datele...";
+
+                    await addDoc(collection(db, "missions", missionId, "victims"), {
+                        name: "Accidentat (Web)",
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        status: "Localizat prin link",
+                        injuries: "Nespecificat",
+                        observations: "Locație trimisă direct de accidentat.",
+                        lastUpdate: serverTimestamp(),
+                        missionId: missionId
+                    });
+
+                    statusDiv.innerText = "✅ LOCAȚIE TRIMISĂ! Salvatorii te văd acum pe hartă. Rămâi pe loc.";
+                    statusDiv.style.color = "green";
+                    btn.innerText = "LOCAȚIE TRIMISĂ";
+                    loader.style.display = "none";
+                } catch (error) {
+                    console.error(error);
+                    statusDiv.innerText = "Eroare la trimitere. Verifică semnalul la internet.";
+                    statusDiv.style.color = "#d32f2f";
+                    btn.disabled = false;
+                    btn.innerText = "REÎNCEARCĂ";
+                    loader.style.display = "none";
+                }
+            },
+            (error) => {
+                statusDiv.innerText = "Eroare: Trebuie să activezi GPS-ul pe telefon pentru a funcționa.";
+                statusDiv.style.color = "#d32f2f";
+                btn.disabled = false;
+                btn.innerText = "REÎNCEARCĂ";
+                loader.style.display = "none";
+            },
+            { enableHighAccuracy: true, timeout: 10000 }
+        );
+    };
+</script>
+
+</body>
+</html>
